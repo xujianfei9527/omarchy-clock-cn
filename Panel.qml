@@ -4,6 +4,7 @@ import Quickshell.Io
 import qs.Commons
 import qs.Ui
 import "Holidays.js" as Holidays
+import "Lunar.js" as Lunar
 import "Model.js" as Model
 
 // The clock's calendar popup: a month grid with ISO week numbers, built to
@@ -310,6 +311,14 @@ Panel {
     var year = dateKey.substr(0, 4)
     var days = root.holidayYears[year] || Holidays.bundledYear(Number(year))
     return days[dateKey] || null
+  }
+
+  function dateTooltip(cell, dayStatus) {
+    var lines = []
+    var lunar = Lunar.description(cell.year, cell.month, cell.day)
+    if (lunar !== "") lines.push(lunar)
+    if (dayStatus !== null) lines.push(Holidays.description(dayStatus))
+    return lines.join("\n")
   }
 
   SystemClock {
@@ -815,16 +824,15 @@ Panel {
                       }
 
                       MouseArea {
-                        id: holidayMouse
+                        id: dateMouse
                         anchors.fill: parent
-                        enabled: parent.dayStatus !== null
-                        hoverEnabled: enabled
+                        hoverEnabled: true
                         acceptedButtons: Qt.NoButton
                       }
 
                       PanelToolTip {
-                        visible: holidayMouse.containsMouse
-                        text: Holidays.description(parent.dayStatus)
+                        visible: dateMouse.containsMouse
+                        text: root.dateTooltip(modelData, parent.dayStatus)
                         fontFamily: root.contentFontFamily
                       }
                     }

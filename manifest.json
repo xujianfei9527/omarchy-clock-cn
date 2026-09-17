@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "id": "evan.clock",
   "name": "My Clock",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "xujianfei9527",
-  "description": "Date/time calendar with Chinese statutory holidays and makeup workdays",
+  "description": "Date/time calendar with Chinese holidays, makeup workdays, and lunar dates",
   "kinds": [
     "bar-widget"
   ],
@@ -13,7 +13,7 @@
   },
   "barWidget": {
     "displayName": "My Clock",
-    "description": "Calendar with Chinese holidays and makeup workdays",
+    "description": "Calendar with Chinese holidays, makeup workdays, and lunar dates",
     "category": "Time",
     "allowMultiple": false
   },
